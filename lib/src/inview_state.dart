@@ -16,6 +16,8 @@ class InViewState extends ChangeNotifier {
   List<String> _currentInViewIds = [];
   final IsInViewPortCondition? _isInViewCondition;
 
+  List<String> get currentInViewIds => [..._currentInViewIds];
+
   InViewState(
       {required List<String> intialIds,
       bool Function(double, double, double)? isInViewCondition})

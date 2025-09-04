@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:stream_transform/stream_transform.dart';
@@ -34,9 +35,13 @@ class InViewNotifier extends StatefulWidget {
   ///as inView.
   final IsInViewPortCondition isInViewPortCondition;
 
+  /// The function get access to which items is currently visible
+  final void Function(List<String> visibleIds)? onVisibleIdsChanges;
+
   InViewNotifier({
     Key? key,
     required this.child,
+    this.onVisibleIdsChanges,
     this.initialInViewIds = const [],
     this.endNotificationOffset = 0.0,
     this.onListEndReached,
@@ -75,6 +80,7 @@ class _InViewNotifierState extends State<InViewNotifier> {
 
   @override
   void dispose() {
+    _inViewState?.removeListener(_inViewListener);
     _inViewState?.dispose();
     _inViewState = null;
     _streamController?.close();
@@ -94,6 +100,16 @@ class _InViewNotifierState extends State<InViewNotifier> {
       intialIds: widget.initialInViewIds,
       isInViewCondition: widget.isInViewPortCondition,
     );
+    _inViewState?.addListener(_inViewListener);
+  }
+
+  List<String> _oldVisible = [];
+  void _inViewListener() {
+    final currentVisible = _inViewState?.currentInViewIds ?? [];
+    if (!DeepCollectionEquality().equals(_oldVisible, currentVisible)) {
+      _oldVisible = currentVisible;
+      widget.onVisibleIdsChanges?.call(currentVisible);
+    }
   }
 
   @override
