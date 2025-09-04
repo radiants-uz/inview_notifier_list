@@ -57,13 +57,13 @@ class _HomePageState extends State<HomePage> {
             MyList(
               initialInViewIds: ['0'],
               inViewPortCondition:
-                  (double deltaTop, double deltaBottom, double vpHeight) {
+                  (String id, double deltaTop, double deltaBottom, double vpHeight) {
                 return (deltaTop < (0.5 * vpHeight) + 100.0 &&
                     deltaBottom > (0.5 * vpHeight) - 100.0);
               },
               inViewArea: Container(
                 height: 200.0,
-                color: Colors.redAccent.withOpacity(0.2),
+                color: Colors.redAccent.withValues(alpha: 0.2),
               ),
             ),
             VideoList(),

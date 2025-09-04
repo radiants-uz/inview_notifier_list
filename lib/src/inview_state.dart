@@ -20,7 +20,7 @@ class InViewState extends ChangeNotifier {
 
   InViewState(
       {required List<String> intialIds,
-      bool Function(double, double, double)? isInViewCondition})
+      bool Function(String, double, double, double)? isInViewCondition})
       : _isInViewCondition = isInViewCondition {
     _contexts = Set<WidgetData>();
     _currentInViewIds.addAll(intialIds);
@@ -67,7 +67,7 @@ class InViewState extends ChangeNotifier {
 
       //Retrieve the viewport related to the scroll area
       final RenderAbstractViewport viewport =
-          RenderAbstractViewport.of(renderObject)!;
+          RenderAbstractViewport.of(renderObject);
       final double vpHeight = notification.metrics.viewportDimension;
       final RevealedOffset vpOffset =
           viewport.getOffsetToReveal(renderObject, 0.0);
@@ -83,7 +83,8 @@ class InViewState extends ChangeNotifier {
       bool isInViewport = false;
 
       //Check if the item is in the viewport by evaluating the provided widget's isInViewPortCondition condition.
-      isInViewport = _isInViewCondition!(deltaTop, deltaBottom, vpHeight);
+      isInViewport =
+          _isInViewCondition!(item.id, deltaTop, deltaBottom, vpHeight);
 
       if (isInViewport) {
         //prevent changing the value on every scroll if its already the same

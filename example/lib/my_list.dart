@@ -22,7 +22,7 @@ class MyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final IsInViewPortCondition condition = inViewPortCondition ??
-        (double deltaTop, double deltaBottom, double vpHeight) {
+        (String id, double deltaTop, double deltaBottom, double vpHeight) {
           return deltaTop < (0.5 * vpHeight) && deltaBottom > (0.5 * vpHeight);
         };
 

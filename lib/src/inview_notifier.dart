@@ -166,6 +166,7 @@ class _InViewNotifierState extends State<InViewNotifier> {
 ///The function that defines the area within which the widgets should be notified
 ///as inView.
 typedef bool IsInViewPortCondition(
+  String id,
   double deltaTop,
   double deltaBottom,
   double viewPortDimension,

@@ -12,8 +12,8 @@ class VideoList extends StatelessWidget {
         InViewNotifierList(
           scrollDirection: Axis.vertical,
           initialInViewIds: ['0'],
-          isInViewPortCondition:
-              (double deltaTop, double deltaBottom, double viewPortDimension) {
+          isInViewPortCondition: (String id, double deltaTop,
+              double deltaBottom, double viewPortDimension) {
             return deltaTop < (0.5 * viewPortDimension) &&
                 deltaBottom > (0.5 * viewPortDimension);
           },

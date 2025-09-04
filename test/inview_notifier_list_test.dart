@@ -6,13 +6,12 @@ import '../example/lib/csv_example.dart';
 
 void main() {
   final TestWidgetsFlutterBinding binding =
-      TestWidgetsFlutterBinding.ensureInitialized()
-          as TestWidgetsFlutterBinding;
+      TestWidgetsFlutterBinding.ensureInitialized();
   group('test the inViewState', () {
     test('only n number of contexts are stored', () {
       final InViewState state = InViewState(
         intialIds: [],
-        isInViewCondition: (doublex, double y, double z) => true,
+        isInViewCondition: (String, doublex, double y, double z) => true,
       );
 
       state.addContext(context: null, id: '0');
@@ -59,7 +58,7 @@ void main() {
         (WidgetTester tester) async {
       final ScrollController controller = ScrollController();
       IsInViewPortCondition condition =
-          (double deltaTop, double deltaBottom, double vpHeight) {
+          (String, double deltaTop, double deltaBottom, double vpHeight) {
         return deltaTop < (0.5 * vpHeight) && deltaBottom > (0.5 * vpHeight);
       };
 
@@ -80,7 +79,7 @@ void main() {
         (WidgetTester tester) async {
       final ScrollController controller = ScrollController();
       IsInViewPortCondition condition =
-          (double deltaTop, double deltaBottom, double vpHeight) {
+          (String, double deltaTop, double deltaBottom, double vpHeight) {
         return deltaTop < (0.5 * vpHeight) && deltaBottom > (0.5 * vpHeight);
       };
 
@@ -111,7 +110,7 @@ void main() {
         (WidgetTester tester) async {
       final ScrollController controller = ScrollController();
       IsInViewPortCondition condition =
-          (double deltaTop, double deltaBottom, double vpHeight) {
+          (String, double deltaTop, double deltaBottom, double vpHeight) {
         return deltaTop < (0.5 * vpHeight) + 100.0 &&
             deltaBottom > (0.5 * vpHeight) - 100.0;
       };
