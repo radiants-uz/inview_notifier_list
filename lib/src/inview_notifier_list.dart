@@ -26,6 +26,7 @@ class InViewNotifierList extends InViewNotifier {
     bool? primary,
     bool shrinkWrap = false,
     bool addAutomaticKeepAlives = true,
+    super.onVisibleIdsChanges,
   })  : assert(endNotificationOffset >= 0.0),
         super(
           key: key,
@@ -80,6 +81,7 @@ class InViewNotifierCustomScrollView extends InViewNotifier {
     bool shrinkWrap = false,
     Key? center,
     double anchor = 0.0,
+    super.onVisibleIdsChanges,
   }) : super(
           key: key,
           initialInViewIds: initialInViewIds,
